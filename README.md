@@ -2,7 +2,7 @@
 
 This C# project scrapes event data from websites of various music venues in Gothenburg, Sweden. It extracts details like date, location, title, description, and links, and saves them in a text file.
 
-## Key Features:
+## Key Features
 
 Scrapes multiple websites: The code can be configured to target different websites by adding URLs to designated lists.
 
@@ -12,7 +12,7 @@ Event Sorting: Events are sorted by date using LINQ before being written to the 
 
 Keyword Highlighting: The code identifies and highlights specific keywords (e.g., composer names, instruments) within titles and descriptions.
 
-## Technologies Used:
+## Technologies Used
 
 C# (.NET)
 
@@ -22,7 +22,7 @@ System.Net.Http (fetching web content)
 
 System.Text.RegularExpressions (date format manipulation)
 
-## Getting Started:
+## Getting Started
 
 Clone or download the repository.
 
