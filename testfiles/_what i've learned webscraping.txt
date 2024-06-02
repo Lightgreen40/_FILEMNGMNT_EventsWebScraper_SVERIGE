@@ -1,0 +1,7 @@
+even if you can see an html element in the "analyze" window in chrome, if you cannot see it on the website, it might be hidden:
+
+CSS CODE:
+.mobile-menu .elementor-widget-spajder-posts.list-type-list .spajder-post-meta span.genre {
+    >>> display: none; <<<
+	
+"display none" is a problem! even if you've done all correctly with XPath, you still won't get to that content, cause it's hidden! normally it's "display: flex/block" or something like that and also visible on the website itself

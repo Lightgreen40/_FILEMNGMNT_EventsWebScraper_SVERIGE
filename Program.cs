@@ -17,8 +17,8 @@ namespace _FILEMNGMNT_EventsWebScraper
     class Program
     {
         static List<EventData> eventsList = new List<EventData>();
-
-
+        static List<string> externalDescriptionLinks = new List<string>();
+        static List<string> externalDescriptions = new List<string>();
 
 
         static async System.Threading.Tasks.Task Main(string[] args)
@@ -66,6 +66,57 @@ namespace _FILEMNGMNT_EventsWebScraper
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Scraping av Unity Jazz websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
+
+            foreach (string url in nefertiti_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
+
+                    List<string> externalDescriptionLinks = PreParseHtml_Nefertiti(htmlContent);
+
+                    Console.WriteLine("pre-fetched linklist:");   //debug
+                    foreach (string link in externalDescriptionLinks)
+                    {
+                        Console.WriteLine(link);
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Pre-collecting av Nefertiti länkar avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
+            Console.ReadLine();
+
+            foreach (string externalUrl in externalDescriptionLinks)
+            {
+                try
+                {
+                    string externalHtmlContent = await GetHtmlContentAsync(externalUrl);
+
+                    externalDescriptions = ParseHtml_NefertitiDescriptions(externalHtmlContent);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Pre-scraping av Nefertiti länkar avslutat");
                     Console.WriteLine();
                     Console.ResetColor();
                 }
@@ -155,10 +206,6 @@ namespace _FILEMNGMNT_EventsWebScraper
 
             Console.ReadLine();   //debug, should auto-run after bug-free
         }
-
-
-
-
 
 
 
@@ -270,12 +317,83 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
+        private static List<string> PreParseHtml_Nefertiti(string htmlContent)
+        {
+            HtmlDocument document = new HtmlDocument();
+            document.LoadHtml(htmlContent);
+
+            var eventNodes = document.DocumentNode.SelectNodes("//article[@class='spajder-post']");
+
+            if (eventNodes != null)
+            {
+                foreach (var node in eventNodes)
+                {
+                    string externalLink = "";
+                    var linkNode = node.SelectSingleNode(".//a");
+                    if (linkNode != null)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        externalLink = GetAttributeValue(node, ".//a", "href");
+                        Console.WriteLine(externalLink);
+                        Console.ResetColor();
+                        externalDescriptionLinks.Add(externalLink);
+                    }
+                }
+            }
+            Console.ReadLine();
+
+            return externalDescriptionLinks;
+        }
+
+
+
+
+        private static List<string> ParseHtml_NefertitiDescriptions(string externalHtmlContent)
+        {
+            HtmlDocument document = new HtmlDocument();
+            document.LoadHtml(externalHtmlContent);
+
+            var eventNodes = document.DocumentNode.SelectNodes("//div[@class='event-text']");
+
+            if (eventNodes != null)
+            {
+                foreach (var node in eventNodes)
+                {
+                    string description = "";
+                    var descriptionNode = node.SelectSingleNode(".//p");
+                    if (descriptionNode != null)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        description = HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
+                        Console.WriteLine(description);
+
+                        externalDescriptions.Add(description);
+                    }
+                }
+            }
+
+            Console.WriteLine("list desc contents:");
+            foreach (string x in externalDescriptions)
+            {
+                Console.WriteLine(x);
+            }
+
+            Console.ReadLine();
+
+            return externalDescriptions;
+        }
+
+
+
+
         static List<EventData> ParseHtml_Nefertiti(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(htmlContent);
 
             var eventNodes = document.DocumentNode.SelectNodes("//article[@class='spajder-post']");
+
+            int i = 0;
 
             if (eventNodes != null)
             {
@@ -326,16 +444,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.WriteLine(title);
                     }
 
-                    string description = "";
-                    var descriptionNode = node.SelectSingleNode(".//div[@class='content']");
-                    if (descriptionNode != null)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        description = HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
-                        Console.WriteLine(description);
-                        Console.ResetColor();
-                    }
-
                     string link = "";
                     var linkNode = node.SelectSingleNode(".//a");
                     if (linkNode != null)
@@ -345,6 +453,18 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.WriteLine(link);
                         Console.ResetColor();
                     }
+
+
+
+
+
+                    //####CONSTRUCTION SITE:
+                    string description = externalDescriptions[i];
+                    i++;
+
+
+
+
 
                     Console.WriteLine();
                     Console.WriteLine();
