@@ -364,7 +364,7 @@ namespace _FILEMNGMNT_EventsWebScraper
                     if (descriptionNode != null)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        description = HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
+                        description += HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
                         Console.WriteLine(description);
 
                         externalDescriptions.Add(description);
