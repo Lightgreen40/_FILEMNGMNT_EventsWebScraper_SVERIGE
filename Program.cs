@@ -48,8 +48,8 @@ namespace _FILEMNGMNT_EventsWebScraper
             Console.WriteLine();
 
 
-            //string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
-            string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
+            string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
+            //string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
             if (System.IO.File.Exists(eventsFile))
             {
                 System.IO.File.Delete(eventsFile);
@@ -73,6 +73,7 @@ namespace _FILEMNGMNT_EventsWebScraper
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
                     Console.ResetColor();
                     Console.ReadLine();
                 }
@@ -86,11 +87,11 @@ namespace _FILEMNGMNT_EventsWebScraper
 
                     List<string> externalDescriptionLinks = PreParseHtml_Nefertiti(htmlContent);
 
-                    Console.WriteLine("pre-fetched linklist:");   //debug
-                    foreach (string link in externalDescriptionLinks)
-                    {
-                        Console.WriteLine(link);
-                    }
+                    //Console.WriteLine("pre-fetched linklist:");   //debug
+                    //foreach (string link in externalDescriptionLinks)
+                    //{
+                    //    Console.WriteLine(link);
+                    //}
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Pre-collecting av Nefertiti länkar avslutat");
@@ -123,12 +124,13 @@ namespace _FILEMNGMNT_EventsWebScraper
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
                     Console.ResetColor();
                     Console.ReadLine();
                 }
             }
 
-            Console.ReadLine();   //debug
+            //Console.ReadLine();   //debug
 
             foreach (string url in nefertiti_urlsList)
             {
@@ -147,6 +149,7 @@ namespace _FILEMNGMNT_EventsWebScraper
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
                     Console.ResetColor();
                     Console.ReadLine();
                 }
@@ -169,6 +172,7 @@ namespace _FILEMNGMNT_EventsWebScraper
             //    {
             //        Console.ForegroundColor = ConsoleColor.Red;
             //        Console.WriteLine(">>> ERROR <<<:" + exception);
+                    //Console.WriteLine();
             //        Console.ResetColor();
             //        Console.ReadLine();
             //    }
@@ -191,6 +195,7 @@ namespace _FILEMNGMNT_EventsWebScraper
             //    {
             //        Console.ForegroundColor = ConsoleColor.Red;
             //        Console.WriteLine(">>> ERROR <<<:" + exception);
+            //        Console.WriteLine();
             //        Console.ResetColor();
             //        Console.ReadLine();
             //    }
@@ -203,6 +208,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
             Console.ForegroundColor= ConsoleColor.Green;
             Console.WriteLine("Done");
+            Console.WriteLine();
             Console.ResetColor();
 
             Console.ReadLine();   //debug, should auto-run after bug-free
@@ -252,7 +258,7 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         date = dateTimeObject.ToString("dd.MM.yyyy");   //to convert initial yyyy-MM-dd to dd.MM.yyyy; NOTE: this is only for DISPLAY of date (normally done above in "dateNode" – dateTimeObject is still in "yyyy-MM-dd", which is okay, as internal calculation and sorting via LINQ doesn't care which date format as long as it's a valid format!)
                         Console.WriteLine(date);
-                        Console.WriteLine("Parsing date string to DateTime object succeeded");
+                        //Console.WriteLine("Parsing date string to DateTime object succeeded");
                         Console.ResetColor();
                     }
                     else
@@ -303,7 +309,7 @@ namespace _FILEMNGMNT_EventsWebScraper
                     eventsList.Add(new EventData
                     {
                         DateTimeObject = dateTimeObject,
-                        Date = date,
+                        Date = dateTimeObject.ToString("dd.MM.yyyy"),
                         Location = location,
                         Title = title,
                         Description = description,
@@ -359,15 +365,41 @@ namespace _FILEMNGMNT_EventsWebScraper
 
             if (eventNodes != null)
             {
-                foreach (var node in eventNodes)
+                foreach (var eventNode in eventNodes)
                 {
                     string description = "";
-                    var descriptionNode = node.SelectSingleNode(".//p");
-                    if (descriptionNode != null)
+                    var descriptionNodes = eventNode.SelectNodes(".//p");
+                    var descriptionNodesDiv = eventNode.SelectNodes(".//div");
+                    List<string> paragraphTexts = new List<string>();
+
+                    if (descriptionNodes != null && descriptionNodes.Count > 0)
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        description += HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
-                        Console.WriteLine(description);
+                        foreach (var descriptionNode in descriptionNodes)
+                        {
+                            paragraphTexts.Add(descriptionNode.InnerText.Trim());
+                        }
+                        string completeDescription = string.Join(Environment.NewLine, paragraphTexts);
+                        completeDescription = HighlightInterestingKeywords(completeDescription);
+                        //Console.WriteLine(completeDescription);
+                        externalDescriptions.Add(completeDescription);
+                    }
+                    else if(descriptionNodesDiv != null && descriptionNodesDiv.Count > 0)
+                    {
+                        foreach (var descriptionNodeDiv in descriptionNodesDiv)
+                        {
+                            paragraphTexts.Add(descriptionNodeDiv.InnerText.Trim());
+                        }
+                        string completeDescription = string.Join(Environment.NewLine, paragraphTexts);
+                        completeDescription = HighlightInterestingKeywords(completeDescription);
+                        //Console.WriteLine(completeDescription);
+                        externalDescriptions.Add(completeDescription);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        description = "WARNING: No description text found, filling with this placeholder instead.";
+                        Console.WriteLine("WARNING: No description text found, filling with this placeholder instead.");
+                        Console.ResetColor();
                         externalDescriptions.Add(description);
                     }
                 }
@@ -393,7 +425,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                 foreach (var node in eventNodes)
                 {
                     Console.WriteLine("Extracted data:");
-                    Console.WriteLine();
 
                     string date = "";
                     var dateNode = node.SelectSingleNode(".//span[@class='timestamp heading']");
@@ -401,27 +432,97 @@ namespace _FILEMNGMNT_EventsWebScraper
                     if (dateNode != null)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine(dateNode.InnerText.Trim());
+                        date = dateNode.InnerText.Trim();
+                        //Console.WriteLine(dateNode.InnerText.Trim());
                         Console.ResetColor();
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine(">>> ERROR <<<: attribute value seems to be empty, exact date could not be extracted");
+                        Console.ResetColor();
                     }
-                    //DateTime dateTimeObject;
-                    //if (DateTime.TryParseExact(date, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out dateTimeObject))
-                    //{
-                          //Console.ForegroundColor = ConsoleColor.Yellow;
-                    //    Console.WriteLine("Parsing date string to DateTime object succeeded");
-                    //}
-                    //else
-                    //{
-                    //    Console.ForegroundColor = ConsoleColor.Red;
-                    //    Console.WriteLine(">>> ERROR <<<: Failed to parse date");
-                    //    Console.ResetColor();
-                    //}
 
+                    DateTime dateTimeObject;
+                    string dateSubstring = date;
+
+                    //Console.WriteLine("before all the processing: " + date);   //debug
+
+
+                    //Use a dictionary for efficient day name removal:
+                    Dictionary<string, string> dayMap = new Dictionary<string, string>()
+                    {
+                        { "Måndag ", "" }, { "Tisdag ", "" }, { "Onsdag ", "" },
+                        { "Torsdag ", "" }, { "Fredag ", "" }, { "Lördag ", "" },
+                        { "Söndag ", "" }
+                    };
+
+                    //Remove days using a loop and dictionary:
+                    foreach (var pair in dayMap)
+                    {
+                        dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
+                    }
+
+                    //Console.WriteLine("after daymap: " + dateSubstring);   //debug
+
+
+                    //Use a dictionary for efficient month name replacements:
+                    Dictionary<string, string> monthMap = new Dictionary<string, string>()
+                    {
+                        { " januari", "-01" }, { " februari", "-02" }, { " mars", "-03" },
+                        { " april", "-04" }, { " maj", "-05" }, { " juni", "-06" },
+                        { " juli", "-07" }, { " augusti", "-08" }, { " september", "-09" },
+                        { " oktober", "-10" }, { " november", "-11" }, { " december", "-12" }
+                    };
+
+                    //Replace month using a loop and dictionary:
+                    foreach (var pair in monthMap)
+                    {
+                        dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
+                    }
+
+                    //Console.WriteLine("after monthMap: " + dateSubstring);   //debug
+
+
+                    //Use a dictionary for efficient day name removal:
+                    Dictionary<string, string> dayMap2 = new Dictionary<string, string>()
+                    {
+                        { " 1-", "01-" }, { " 2-", "02-" }, { " 3-", "03-" },
+                        { " 4-", "04-" }, { " 5-", "05-" }, { " 6-", "06-" },
+                        { " 7-", "07-" }, { " 8-", "08-" }, { " 9-", "09-" }
+                    };
+
+                    //convert single digit days to two-digits using a loop and dictionary:
+                    foreach (var pair in dayMap2)
+                    {
+                        dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
+                    }
+
+                    //Console.WriteLine("after dayMap2: " + dateSubstring);   //debug
+
+
+                    //append current year to achieve format dd-MM-yyy:
+                    dateSubstring = dateSubstring + "-" + DateTime.Now.ToString("yyyy");
+
+                    //Console.WriteLine("doublechecking date conversion: " + dateSubstring);   //debug
+
+                    //Use a regular expression to match the desired format:
+                    dateSubstring = Regex.Match(dateSubstring, @"\d{2}-\d{2}-\d{4}").Value;
+
+                    //Parse the date string:
+                    if (DateTime.TryParseExact(dateSubstring, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out dateTimeObject))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(dateTimeObject.ToString("dd.MM.yyyy"));   //Display in desired format
+                        //Console.WriteLine("Parsing date string to DateTime object succeeded");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(">>> ERROR <<<: Failed to parse date");
+                        Console.ResetColor();
+                    }
 
                     string location = "Hvitfeldsplatsen 6";
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -437,6 +538,10 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.WriteLine(title);
                     }
 
+                    Console.WriteLine(externalDescriptions[i]);
+                    string description = externalDescriptions[i];
+                    i++;
+
                     string link = "";
                     var linkNode = node.SelectSingleNode(".//a");
                     if (linkNode != null)
@@ -447,25 +552,13 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.ResetColor();
                     }
 
-
-
-
-
-                    //####CONSTRUCTION SITE:
-                    string description = externalDescriptions[i];
-                    i++;
-
-
-
-
-
                     Console.WriteLine();
                     Console.WriteLine();
 
                     eventsList.Add(new EventData
                     {
-                        //DateTimeObject = dateTimeObject,
-                        Date = date,
+                        DateTimeObject = dateTimeObject,
+                        Date = dateTimeObject.ToString("dd.MM.yyyy"),
                         Location = location,
                         Title = title,
                         Description = description,
