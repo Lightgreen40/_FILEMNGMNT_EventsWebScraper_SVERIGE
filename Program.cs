@@ -48,8 +48,8 @@ namespace _FILEMNGMNT_EventsWebScraper
             Console.WriteLine();
 
 
-            string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
-            //string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
+            //string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
+            string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
             if (System.IO.File.Exists(eventsFile))
             {
                 System.IO.File.Delete(eventsFile);
@@ -105,7 +105,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                     Console.ReadLine();
                 }
             }
-            Console.ReadLine();
 
             foreach (string externalUrl in externalDescriptionLinks)
             {
@@ -340,7 +339,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                     }
                 }
             }
-            Console.ReadLine();
 
             return externalDescriptionLinks;
         }
@@ -377,8 +375,6 @@ namespace _FILEMNGMNT_EventsWebScraper
             {
                 Console.WriteLine(x);
             }
-
-            Console.ReadLine();
 
             return externalDescriptions;
         }
