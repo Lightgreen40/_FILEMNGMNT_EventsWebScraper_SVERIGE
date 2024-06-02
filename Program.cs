@@ -48,8 +48,8 @@ namespace _FILEMNGMNT_EventsWebScraper
             Console.WriteLine();
 
 
-            string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
-            //string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
+            //string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
+            string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
             if (System.IO.File.Exists(eventsFile))
             {
                 System.IO.File.Delete(eventsFile);
@@ -105,7 +105,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                     Console.ReadLine();
                 }
             }
-            Console.ReadLine();
 
             foreach (string externalUrl in externalDescriptionLinks)
             {
@@ -128,6 +127,8 @@ namespace _FILEMNGMNT_EventsWebScraper
                     Console.ReadLine();
                 }
             }
+
+            Console.ReadLine();   //debug
 
             foreach (string url in nefertiti_urlsList)
             {
@@ -324,6 +325,8 @@ namespace _FILEMNGMNT_EventsWebScraper
 
             var eventNodes = document.DocumentNode.SelectNodes("//article[@class='spajder-post']");
 
+            Console.WriteLine("PreParseHtml_Nefertiti:");
+
             if (eventNodes != null)
             {
                 foreach (var node in eventNodes)
@@ -334,13 +337,12 @@ namespace _FILEMNGMNT_EventsWebScraper
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         externalLink = GetAttributeValue(node, ".//a", "href");
-                        Console.WriteLine(externalLink);
+                        Console.WriteLine(externalLink);   //debug
                         Console.ResetColor();
                         externalDescriptionLinks.Add(externalLink);
                     }
                 }
             }
-            Console.ReadLine();
 
             return externalDescriptionLinks;
         }
@@ -366,19 +368,10 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         description += HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
                         Console.WriteLine(description);
-
                         externalDescriptions.Add(description);
                     }
                 }
             }
-
-            Console.WriteLine("list desc contents:");
-            foreach (string x in externalDescriptions)
-            {
-                Console.WriteLine(x);
-            }
-
-            Console.ReadLine();
 
             return externalDescriptions;
         }
