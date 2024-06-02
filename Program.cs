@@ -128,6 +128,8 @@ namespace _FILEMNGMNT_EventsWebScraper
                 }
             }
 
+            Console.ReadLine();   //debug
+
             foreach (string url in nefertiti_urlsList)
             {
                 try
@@ -323,6 +325,8 @@ namespace _FILEMNGMNT_EventsWebScraper
 
             var eventNodes = document.DocumentNode.SelectNodes("//article[@class='spajder-post']");
 
+            Console.WriteLine("PreParseHtml_Nefertiti:");
+
             if (eventNodes != null)
             {
                 foreach (var node in eventNodes)
@@ -333,7 +337,7 @@ namespace _FILEMNGMNT_EventsWebScraper
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         externalLink = GetAttributeValue(node, ".//a", "href");
-                        Console.WriteLine(externalLink);
+                        Console.WriteLine(externalLink);   //debug
                         Console.ResetColor();
                         externalDescriptionLinks.Add(externalLink);
                     }
@@ -364,16 +368,9 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         description = HighlightInterestingKeywords(descriptionNode.InnerText.Trim());
                         Console.WriteLine(description);
-
                         externalDescriptions.Add(description);
                     }
                 }
-            }
-
-            Console.WriteLine("list desc contents:");
-            foreach (string x in externalDescriptions)
-            {
-                Console.WriteLine(x);
             }
 
             return externalDescriptions;
