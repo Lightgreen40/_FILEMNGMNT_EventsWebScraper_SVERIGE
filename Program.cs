@@ -48,8 +48,8 @@ namespace _FILEMNGMNT_EventsWebScraper
             Console.WriteLine();
 
 
-            string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
-            //string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
+            //string eventsFile = @"C:\Users\oelll\Dropbox\_WeeklyEventsGothenburg_4BCAL.txt";
+            string eventsFile = @"C:\Users\Bernd\Downloads\Csharp\_FILEMNGMNT_EventsWebScraper_SVERIGE\testfiles\_WeeklyEventsGothenburg_4BCAL.txt";
             if (System.IO.File.Exists(eventsFile))
             {
                 System.IO.File.Delete(eventsFile);
@@ -155,28 +155,28 @@ namespace _FILEMNGMNT_EventsWebScraper
                 }
             }
 
-            //foreach (string url in gso_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in gso_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<EventData> eventsList = ParseHtml_GSO(htmlContent);
+                    List<EventData> eventsList = ParseHtml_GSO(htmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Scraping av GSO websidan avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-                    //Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Scraping av GSO websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
             //foreach (string url in musikensHus_urlsList)
             //{
@@ -323,7 +323,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-
+        //färdig:
         private static List<string> PreParseHtml_Nefertiti(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -355,7 +355,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-
+        //färdig:
         private static List<string> ParseHtml_NefertitiDescriptions(string externalHtmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -410,7 +410,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-
+        //färdig:
         static List<EventData> ParseHtml_Nefertiti(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -578,7 +578,7 @@ namespace _FILEMNGMNT_EventsWebScraper
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(htmlContent);
 
-            var eventNodes = document.DocumentNode.SelectNodes("//div[@class='clear event-wrapper']");
+            var eventNodes = document.DocumentNode.SelectNodes("//a[@class='gso-block box-event-compact']");   //might only scrape current month, but that's okej
 
             if (eventNodes != null)
             {
@@ -588,80 +588,80 @@ namespace _FILEMNGMNT_EventsWebScraper
                     Console.WriteLine();
 
                     string date = "";
-                    var dateNode = node.SelectSingleNode(".//span[@class='eventdatum']");   //extract also time
+                    //var dateNode = node.SelectSingleNode(".//span[@class='eventdatum']");   //extract also time
 
-                    //example: "Fr, 15.3. 20:00 Uhr"
-                    if (dateNode != null)
-                    {
-                        date = dateNode.InnerText.Trim();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine(date);
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(">>> ERROR <<<: attribute value seems to be empty, exact date could not be extracted");
-                    }
+                    ////example: "Fr, 15.3. 20:00 Uhr"
+                    //if (dateNode != null)
+                    //{
+                    //    date = dateNode.InnerText.Trim();
+                    //    Console.ForegroundColor = ConsoleColor.Yellow;
+                    //    Console.WriteLine(date);
+                    //}
+                    //else
+                    //{
+                    //    Console.ForegroundColor = ConsoleColor.Red;
+                    //    Console.WriteLine(">>> ERROR <<<: attribute value seems to be empty, exact date could not be extracted");
+                    //}
 
-                    DateTime dateTimeObject;
-                    //Extract the day and month components from the date string, accounting for variability that day and month can be either one or two digits:
-                    string dateSubstring = Regex.Match(date, @"\d+\.\d+\.").Value + DateTime.Now.Year.ToString();
-                    string[] dateParts = Regex.Match(date, @"\d+\.\d+\.").Value.Split('.');
-                    int dayLength = dateParts[0].Length;
-                    int monthLength = dateParts[1].Length;
-                    //Construct a custom format string based on the lengths of the day and month components:
-                    string customFormat = $"{new string('d', dayLength)}.{new string('M', monthLength)}.yyyy";
-                    if (DateTime.TryParseExact(dateSubstring, customFormat, null, System.Globalization.DateTimeStyles.None, out dateTimeObject))
-                    {
-                        Console.WriteLine("Parsing date string to DateTime object succeeded");
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(">>> ERROR <<<: Failed to parse date");
-                        Console.ResetColor();
-                    }
+                    //DateTime dateTimeObject;
+                    ////Extract the day and month components from the date string, accounting for variability that day and month can be either one or two digits:
+                    //string dateSubstring = Regex.Match(date, @"\d+\.\d+\.").Value + DateTime.Now.Year.ToString();
+                    //string[] dateParts = Regex.Match(date, @"\d+\.\d+\.").Value.Split('.');
+                    //int dayLength = dateParts[0].Length;
+                    //int monthLength = dateParts[1].Length;
+                    ////Construct a custom format string based on the lengths of the day and month components:
+                    //string customFormat = $"{new string('d', dayLength)}.{new string('M', monthLength)}.yyyy";
+                    //if (DateTime.TryParseExact(dateSubstring, customFormat, null, System.Globalization.DateTimeStyles.None, out dateTimeObject))
+                    //{
+                    //    Console.WriteLine("Parsing date string to DateTime object succeeded");
+                    //}
+                    //else
+                    //{
+                    //    Console.ForegroundColor = ConsoleColor.Red;
+                    //    Console.WriteLine(">>> ERROR <<<: Failed to parse date");
+                    //    Console.ResetColor();
+                    //}
 
-                    string location = "KANAPEE, Edenstraße 1 (parallel zur Lister Meile direkt gegenüber der Apostelkirche)";   //generic, because always same location
+                    string location = "GSO";   //generic, because always same location
                     Console.WriteLine(location);
 
                     string title = "";
-                    var titleNode = node.SelectSingleNode(".//h3");
+                    var titleNode = node.SelectSingleNode(".//h5");
                     if (titleNode != null)
                     {
                         title = HighlightInterestingKeywords(titleNode.InnerText.Trim());
-                        title = WebUtility.HtmlDecode(title);   //decode entities such as in ""Passions&#8220;"
+                        //title = WebUtility.HtmlDecode(title);   //decode entities such as in ""Passions&#8220;"
                         Console.WriteLine(title);
                     }
 
                     string description = "";
-                    var descriptionNode1 = node.SelectSingleNode(".//div[@class='eventinfo']/p[1]");
-                    var descriptionNode2 = node.SelectSingleNode(".//div[@class='eventinfo']/p[2]");
-                    if (descriptionNode1 != null && descriptionNode2 != null)
-                    {
-                        description = HighlightInterestingKeywords(descriptionNode1.InnerText.Trim()) + 
-                            "\n" +
-                            HighlightInterestingKeywords(descriptionNode2.InnerText.Trim());
-                        description = WebUtility.HtmlDecode(description);
-                        Console.WriteLine(description);
-                    }
+                    //var descriptionNode1 = node.SelectSingleNode(".//div[@class='eventinfo']/p[1]");
+                    //var descriptionNode2 = node.SelectSingleNode(".//div[@class='eventinfo']/p[2]");
+                    //if (descriptionNode1 != null && descriptionNode2 != null)
+                    //{
+                    //    description = HighlightInterestingKeywords(descriptionNode1.InnerText.Trim()) + 
+                    //        "\n" +
+                    //        HighlightInterestingKeywords(descriptionNode2.InnerText.Trim());
+                    //    description = WebUtility.HtmlDecode(description);
+                    //    Console.WriteLine(description);
+                    //}
 
                     string link = "";
-                    var linkNode = node.SelectSingleNode(".//div[@class='eventinfo']/a");
-                    if (linkNode != null)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        link = GetAttributeValue(node, ".//div[@class='eventinfo']/a", "href");
-                        Console.WriteLine(link);
-                        Console.ResetColor();
-                    }
+                    //var linkNode = node.SelectSingleNode(".//div[@class='eventinfo']/a");
+                    //if (linkNode != null)
+                    //{
+                    //    Console.ForegroundColor = ConsoleColor.Yellow;
+                    //    link = GetAttributeValue(node, ".//div[@class='eventinfo']/a", "href");
+                    //    Console.WriteLine(link);
+                    //    Console.ResetColor();
+                    //}
 
                     Console.WriteLine();
                     Console.WriteLine();
 
                     eventsList.Add(new EventData
                     {
-                        DateTimeObject = dateTimeObject,
+                        //DateTimeObject = dateTimeObject,
                         Date = date,
                         Location = location,
                         Title = title,
