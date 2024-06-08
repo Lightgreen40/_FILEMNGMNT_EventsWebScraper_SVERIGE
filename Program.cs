@@ -8,9 +8,7 @@ using System.Net.Http;
 using static System.Net.WebRequestMethods;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net;
-
-
-
+using System.Globalization;
 
 namespace _FILEMNGMNT_EventsWebScraper
 {
@@ -56,104 +54,104 @@ namespace _FILEMNGMNT_EventsWebScraper
             }
 
 
-            //foreach (string url in unityJazz_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in unityJazz_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<EventData> eventsList = ParseHtml_UnityJazz(htmlContent);
+                    List<EventData> eventsList = ParseHtml_UnityJazz(htmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Scraping av Unity Jazz websidan avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Scraping av Unity Jazz websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
-            //foreach (string url in nefertiti_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in nefertiti_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<string> externalDescriptionLinks = PreParseHtml_Nefertiti(htmlContent);
+                    List<string> externalDescriptionLinks = PreParseHtml_Nefertiti(htmlContent);
 
-            //        //Console.WriteLine("pre-fetched linklist:");   //debug
-            //        //foreach (string link in externalDescriptionLinks)
-            //        //{
-            //        //    Console.WriteLine(link);
-            //        //}
+                    //Console.WriteLine("pre-fetched linklist:");   //debug
+                    //foreach (string link in externalDescriptionLinks)
+                    //{
+                    //    Console.WriteLine(link);
+                    //}
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Pre-collecting av Nefertiti länkar avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Pre-collecting av Nefertiti länkar avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
-            //foreach (string externalUrl in externalDescriptionLinks)
-            //{
-            //    try
-            //    {
-            //        string externalHtmlContent = await GetHtmlContentAsync(externalUrl);
+            foreach (string externalUrl in externalDescriptionLinks)
+            {
+                try
+                {
+                    string externalHtmlContent = await GetHtmlContentAsync(externalUrl);
 
-            //        externalDescriptions = ParseHtml_NefertitiDescriptions(externalHtmlContent);
+                    externalDescriptions = ParseHtml_NefertitiDescriptions(externalHtmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Pre-scraping av Nefertiti länkar avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Pre-scraping av Nefertiti länkar avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
             ////Console.ReadLine();   //debug
 
-            //foreach (string url in nefertiti_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in nefertiti_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<EventData> eventsList = ParseHtml_Nefertiti(htmlContent);
+                    List<EventData> eventsList = ParseHtml_Nefertiti(htmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Scraping av Nefertiti websidan avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Scraping av Nefertiti websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
             foreach (string url in gso_urlsList)
             {
@@ -590,7 +588,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                     string date = "";
                     var dateNode = node.SelectSingleNode(".//div[@class='gso-tag color-scheme-gold']");
 
-                    DateTime dateObject = new DateTime();
                     DateTime dateTimeObject = new DateTime();
 
                     if (dateNode != null)
@@ -602,76 +599,26 @@ namespace _FILEMNGMNT_EventsWebScraper
 
                         try
                         {
-                            string dateSubstring = date;
-                            //Extract the day and month components from the date string, accounting for variability that day and month can be either one or two digits:
                             //date time example from website: "6 jun 14.00", konvertera: "6 " => "06-", "jun " => "06-", "2024", "14.00" => "14:00:00"
 
+                            //Define input/output format:
+                            string inputFormat = "d MMM HH.mm";
+                            string outputFormat = "yyyy-MM-dd, HH:mm";
 
-                            //Use a dictionary for efficient day conversion:
-                            Dictionary<string, string> dayMap = new Dictionary<string, string>()
+                            //Create custom DateTimeFormatInfo, where you state in a special array the abbreviated names of the months (here i Swedish):
+                            DateTimeFormatInfo dateTimeFormatInfo_ = new DateTimeFormatInfo
                             {
-                                { "1 ", "01-" }, { "2 ", "02-" }, { "3 ", "03-" },
-                                { "4 ", "04-" }, { "5 ", "05-" }, { "6 ", "06-" },
-                                { "7 ", "07-" }, { "8 ", "08-" }, { "9 ", "09-" },
-                                { "10 ", "10-" }, { "11 ", "11-" }, { "12 ", "12-" },
-                                { "13 ", "13-" }, { "14 ", "14-" }, { "15 ", "15-" },
-                                { "16 ", "16-" }, { "17 ", "17-" }, { "18 ", "18-" },
-                                { "19 ", "19-" }, { "20 ", "20-" }, { "21 ", "21-" },
-                                { "22 ", "22-" }, { "23 ", "23-" }, { "24 ", "24-" },
-                                { "25 ", "25-" }, { "26 ", "26-" }, { "27 ", "27-" },
-                                { "28 ", "28-" }, { "29 ", "29-" }, { "30 ", "30-" },
-                                { "31 ", "31-" }
-                            };   //klappt so nicht (wg. "106 jun 2024", etc.) => vielleicht RegEx: "(\d+ )(\w+) => 
+                                AbbreviatedMonthNames = new[] { "jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec", "" },
+                                AbbreviatedMonthGenitiveNames = new[] { "jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt", "nov", "dec", "" }
+                            };
 
-                            foreach (var pair in dayMap)
-                            {
-                                dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
-                            }
+                            //Parse the date string to a DateTime object:
+                            dateTimeObject = DateTime.ParseExact(date, inputFormat, dateTimeFormatInfo_);
 
-                            Console.WriteLine("dayMap processing: " + dateSubstring);   //debug
+                            //Format the DateTime object to the desired output format:
+                            string formattedDate = dateTimeObject.ToString(outputFormat);
 
-
-                            //Use a dictionary for efficient month conversion:
-                            Dictionary<string, string> monthYearMap = new Dictionary<string, string>()
-                            {
-                                { "jan ", "01-" + DateTime.Now.Year.ToString() + ", " },
-                                { "feb ", "02-" + DateTime.Now.Year.ToString() + ", " },
-                                { "mar ", "03-" + DateTime.Now.Year.ToString() + ", " },
-                                { "apr ", "04-" + DateTime.Now.Year.ToString() + ", " },
-                                { "maj ", "05-" + DateTime.Now.Year.ToString() + ", " },
-                                { "jun ", "06-" + DateTime.Now.Year.ToString() + ", " },
-                                { "jul ", "07-" + DateTime.Now.Year.ToString() + ", " },
-                                { "aug ", "08-" + DateTime.Now.Year.ToString() + ", " },
-                                { "sep ", "09-" + DateTime.Now.Year.ToString() + ", " },
-                                { "okt ", "10-" + DateTime.Now.Year.ToString() + ", " },
-                                { "nov ", "11-" + DateTime.Now.Year.ToString() + ", " },
-                                { "dec ", "12-" + DateTime.Now.Year.ToString() + ", " }
-                             };
-
-                            foreach (var pair in monthYearMap)
-                            {
-                                dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
-                            }
-
-                            Console.WriteLine("monthYearMap processing: " + dateSubstring);   //debug
-
-                            //Split the string into date and time parts:
-                            string[] parts = dateSubstring.Split(',');
-
-                            //Parse the date part:
-                            dateObject = DateTime.ParseExact(parts[0], "dd-MM-yyyy", null);
-
-                            //Parse the time part (assuming hours and minutes only):
-                            string[] timeParts = parts[1].Trim().Split('.');   //Remove potential leading/trailing spaces and split by "."
-                            int hour = int.Parse(timeParts[0]);
-                            int minute = int.Parse(timeParts[1]);
-
-                            //Combine date and time parts:
-                            dateTimeObject = new DateTime(dateObject.Year, dateObject.Month, dateObject.Day, hour, minute, 0);   //Set seconds to 0
-
-                            date = dateTimeObject.ToString();
-
-                            Console.WriteLine(date);   //Output: dd-MM-yyyy hh:mm:00
+                            //Console.WriteLine("formattedDate:" + formattedDate);   //debug
                         }
                         catch (Exception exception)
                         {
@@ -687,7 +634,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                         Console.ResetColor();
                     }
 
-                    Console.ReadLine();
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     string location = "Viktor Rydbergsgatan 4";   //generic, because always same location
@@ -715,14 +661,10 @@ namespace _FILEMNGMNT_EventsWebScraper
                     }
 
                     string link = "";
-                    var linkNode = node.SelectSingleNode(".//a[@class='gso-block box-event-compact']");
-                    if (linkNode != null)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        link = GetAttributeValue(node, ".//a[@class='gso-block box-event-compact']", "href");
-                        Console.WriteLine(link);
-                        Console.ResetColor();
-                    }
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    link = node.GetAttributeValue("href", string.Empty);   //this is how you "self-reference" the node document.DocumentNode.SelectNodes("//a[@class='gso-block box-event-compact']") itself
+                    Console.WriteLine(link);
+                    Console.ResetColor();
 
                     Console.WriteLine();
                     Console.WriteLine();
@@ -974,3 +916,73 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 //if needed for html entities decoding:
 //title = WebUtility.HtmlDecode(title);   //decode entities such as in ""Passions&#8220;"
+
+/*
+
+                            string dateSubstring = date;
+
+                            //Use a dictionary for efficient day conversion:
+                            Dictionary<string, string> dayMap = new Dictionary<string, string>()
+                            {
+                                { "1 ", "01-" }, { "2 ", "02-" }, { "3 ", "03-" },
+                                { "4 ", "04-" }, { "5 ", "05-" }, { "6 ", "06-" },
+                                { "7 ", "07-" }, { "8 ", "08-" }, { "9 ", "09-" },
+                                { "10 ", "10-" }, { "11 ", "11-" }, { "12 ", "12-" },
+                                { "13 ", "13-" }, { "14 ", "14-" }, { "15 ", "15-" },
+                                { "16 ", "16-" }, { "17 ", "17-" }, { "18 ", "18-" },
+                                { "19 ", "19-" }, { "20 ", "20-" }, { "21 ", "21-" },
+                                { "22 ", "22-" }, { "23 ", "23-" }, { "24 ", "24-" },
+                                { "25 ", "25-" }, { "26 ", "26-" }, { "27 ", "27-" },
+                                { "28 ", "28-" }, { "29 ", "29-" }, { "30 ", "30-" },
+                                { "31 ", "31-" }
+                            };   //klappt so nicht (wg. "106 jun 2024", etc.) => vielleicht RegEx: "(\d+ )(\w+) => 
+
+                            foreach (var pair in dayMap)
+                            {
+                                dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
+                            }
+
+                            Console.WriteLine("dayMap processing: " + dateSubstring);   //debug
+
+
+                            //Use a dictionary for efficient month conversion:
+                            Dictionary<string, string> monthYearMap = new Dictionary<string, string>()
+                            {
+                                { "jan ", "01-" + DateTime.Now.Year.ToString() + ", " },
+                                { "feb ", "02-" + DateTime.Now.Year.ToString() + ", " },
+                                { "mar ", "03-" + DateTime.Now.Year.ToString() + ", " },
+                                { "apr ", "04-" + DateTime.Now.Year.ToString() + ", " },
+                                { "maj ", "05-" + DateTime.Now.Year.ToString() + ", " },
+                                { "jun ", "06-" + DateTime.Now.Year.ToString() + ", " },
+                                { "jul ", "07-" + DateTime.Now.Year.ToString() + ", " },
+                                { "aug ", "08-" + DateTime.Now.Year.ToString() + ", " },
+                                { "sep ", "09-" + DateTime.Now.Year.ToString() + ", " },
+                                { "okt ", "10-" + DateTime.Now.Year.ToString() + ", " },
+                                { "nov ", "11-" + DateTime.Now.Year.ToString() + ", " },
+                                { "dec ", "12-" + DateTime.Now.Year.ToString() + ", " }
+                             };
+
+                            foreach (var pair in monthYearMap)
+                            {
+                                dateSubstring = dateSubstring.Replace(pair.Key, pair.Value);
+                            }
+
+                            Console.WriteLine("monthYearMap processing: " + dateSubstring);   //debug
+
+                            //Split the string into date and time parts:
+                            string[] parts = dateSubstring.Split(',');
+
+                            //Parse the date part:
+                            dateObject = DateTime.ParseExact(parts[0], "dd-MM-yyyy", null);
+
+                            //Parse the time part (assuming hours and minutes only):
+                            string[] timeParts = parts[1].Trim().Split('.');   //Remove potential leading/trailing spaces and split by "."
+                            int hour = int.Parse(timeParts[0]);
+                            int minute = int.Parse(timeParts[1]);
+
+                            //Combine date and time parts:
+                            dateTimeObject = new DateTime(dateObject.Year, dateObject.Month, dateObject.Day, hour, minute, 0);   //Set seconds to 0
+
+                            date = dateTimeObject.ToString();
+
+*/
