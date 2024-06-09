@@ -10,6 +10,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Net;
 using System.Globalization;
 
+
+
+
 namespace _FILEMNGMNT_EventsWebScraper
 {
     class Program
@@ -54,127 +57,127 @@ namespace _FILEMNGMNT_EventsWebScraper
             }
 
 
-            //foreach (string url in unityJazz_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in unityJazz_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<EventData> eventsList = ParseHtml_UnityJazz(htmlContent);
+                    List<EventData> eventsList = ParseHtml_UnityJazz(htmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Scraping av Unity Jazz websidan avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Scraping av Unity Jazz websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
-            //foreach (string url in nefertiti_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in nefertiti_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<string> externalDescriptionLinks = PreParseHtml_Nefertiti(htmlContent);
+                    List<string> externalDescriptionLinks = PreParseHtml_Nefertiti(htmlContent);
 
-            //        //Console.WriteLine("pre-fetched linklist:");   //debug
-            //        //foreach (string link in externalDescriptionLinks)
-            //        //{
-            //        //    Console.WriteLine(link);
-            //        //}
+                    //Console.WriteLine("pre-fetched linklist:");   //debug
+                    //foreach (string link in externalDescriptionLinks)
+                    //{
+                    //    Console.WriteLine(link);
+                    //}
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Pre-collecting av Nefertiti länkar avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Pre-collecting av Nefertiti länkar avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
-            //foreach (string externalUrl in externalDescriptionLinks)
-            //{
-            //    try
-            //    {
-            //        string externalHtmlContent = await GetHtmlContentAsync(externalUrl);
+            foreach (string externalUrl in externalDescriptionLinks)
+            {
+                try
+                {
+                    string externalHtmlContent = await GetHtmlContentAsync(externalUrl);
 
-            //        externalDescriptions = ParseHtml_NefertitiDescriptions(externalHtmlContent);
+                    externalDescriptions = ParseHtml_NefertitiDescriptions(externalHtmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Pre-scraping av Nefertiti länkar avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Pre-scraping av Nefertiti länkar avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
-            //////Console.ReadLine();   //debug
+            ////Console.ReadLine();   //debug
 
-            //foreach (string url in nefertiti_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in nefertiti_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<EventData> eventsList = ParseHtml_Nefertiti(htmlContent);
+                    List<EventData> eventsList = ParseHtml_Nefertiti(htmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Scraping av Nefertiti websidan avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Scraping av Nefertiti websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
-            //foreach (string url in gso_urlsList)
-            //{
-            //    try
-            //    {
-            //        string htmlContent = await GetHtmlContentAsync(url);
+            foreach (string url in gso_urlsList)
+            {
+                try
+                {
+                    string htmlContent = await GetHtmlContentAsync(url);
 
-            //        List<EventData> eventsList = ParseHtml_GSO(htmlContent);
+                    List<EventData> eventsList = ParseHtml_GSO(htmlContent);
 
-            //        Console.ForegroundColor = ConsoleColor.Green;
-            //        Console.WriteLine("Scraping av GSO websidan avslutat");
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        Console.ForegroundColor = ConsoleColor.Red;
-            //        Console.WriteLine(">>> ERROR <<<:" + exception);
-            //        Console.WriteLine();
-            //        Console.ResetColor();
-            //        Console.ReadLine();
-            //    }
-            //}
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Scraping av GSO websidan avslutat");
+                    Console.WriteLine();
+                    Console.ResetColor();
+                }
+                catch (Exception exception)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(">>> ERROR <<<:" + exception);
+                    Console.WriteLine();
+                    Console.ResetColor();
+                    Console.ReadLine();
+                }
+            }
 
             foreach (string url in musikensHus_urlsList)
             {
@@ -227,7 +230,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-        //färdig:
+
         static List<EventData> ParseHtml_UnityJazz(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -321,7 +324,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-        //färdig:
+
         private static List<string> PreParseHtml_Nefertiti(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -353,7 +356,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-        //färdig:
+
         private static List<string> ParseHtml_NefertitiDescriptions(string externalHtmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -408,7 +411,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-        //färdig:
+
         static List<EventData> ParseHtml_Nefertiti(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -570,7 +573,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
 
 
-        //färdig:
+
         static List<EventData> ParseHtml_GSO(string htmlContent)
         {
             HtmlDocument document = new HtmlDocument();
@@ -583,7 +586,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                 foreach (var node in eventNodes)
                 {
                     Console.WriteLine("Extracted data:");
-                    Console.WriteLine();
 
                     string date = "";
                     var dateNode = node.SelectSingleNode(".//div[@class='gso-tag color-scheme-gold']");
@@ -617,8 +619,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
                             //Format the DateTime object to the desired output format:
                             string formattedDate = dateTimeObject.ToString(outputFormat);
-
-                            //Console.WriteLine("formattedDate:" + formattedDate);   //debug
+                            //Console.WriteLine(formattedDate);
                         }
                         catch (Exception exception)
                         {
@@ -699,7 +700,6 @@ namespace _FILEMNGMNT_EventsWebScraper
                 foreach (var node in eventNodes)
                 {
                     Console.WriteLine("Extracted data:");
-                    Console.WriteLine();
 
                     string date = "";
                     var dateNode1 = node.SelectSingleNode("..//div[@class='cmscontent-date']/h4");
@@ -708,75 +708,55 @@ namespace _FILEMNGMNT_EventsWebScraper
                     //Use a dictionary for efficient month name replacements:
                     Dictionary<string, string> monthMap = new Dictionary<string, string>()
                     {
-                        { "Jan", "-01" }, { "Feb", "-02" }, { "Mar", "-03" },
-                        { "Apr", "-04" }, { "Maj", "-05" }, { "Jun", "-06" },
-                        { "Jul", "-07" }, { "Aug", "-08" }, { "Sep", "-09" },
-                        { "Okt", "-10" }, { "Nov", "-11" }, { "Dec", "-12" }
+                        { "Jan", "01" }, { "Feb", "02" }, { "Mar", "03" },
+                        { "Apr", "04" }, { "Maj", "05" }, { "Jun", "06" },
+                        { "Jul", "07" }, { "Aug", "08" }, { "Sep", "09" },
+                        { "Okt", "10" }, { "Nov", "11" }, { "Dec", "12" }
                     };
 
-                    string dateMonthSubstring = dateNode2.InnerText.Trim().ToLower().Substring(0, dateNode2.InnerText.Trim().IndexOf('/'));
+                    string monthSubstring = dateNode2.InnerText.Trim().Substring(0, dateNode2.InnerText.Trim().IndexOf('/'));
 
                     //Replace month using a loop and dictionary:
                     foreach (var pair in monthMap)
                     {
-                        dateMonthSubstring = dateMonthSubstring.Replace(pair.Key, pair.Value);
+                        monthSubstring = monthSubstring.Replace(pair.Key, pair.Value);
                     }
 
-                    string dayMonth = "2024" + "-" + dateMonthSubstring + "-" + dateNode1.InnerText.Trim();   //output as dateObject compatible format yyyy-MM-dd
+                    string dayMonth = dateNode1.InnerText.Trim() + "-" + monthSubstring + "-";   //output as dateObject compatible format yyyy-MM-dd
 
-                    Console.WriteLine(dayMonth);
+                    //Console.WriteLine("dayMonth: " + dayMonth);   //debug
 
+                    DateTime dateTimeObject;
+                    //Extract the day and month components from the date string, accounting for variability that day and month can be either one or two digits:
+                    string dateSubstring = Regex.Match(dayMonth, @"\d+\-\d+-").Value + DateTime.Now.Year.ToString();
+                    //Console.WriteLine("datesubstring: " + dateSubstring);   //debug
+                    date = dateSubstring;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(date);
+                    Console.ResetColor();
 
-
-                    //if (dateNode1 != null && dateNode2 != null && dateNode3 != null)
-                    //{
-                    //    date = dateNode1.InnerText.Trim() +
-                    //        "." +
-                    //        dateNode2.InnerText.Trim()
-                    //        .Replace("Jan", "01.")
-                    //        .Replace("Feb", "02.")
-                    //        .Replace("Mär", "03.")
-                    //        .Replace("Apr", "04.")
-                    //        .Replace("Mai", "05.")
-                    //        .Replace("Jun", "06.")
-                    //        .Replace("Jul", "07.")
-                    //        .Replace("Aug", "08.")
-                    //        .Replace("Sep", "09.")
-                    //        .Replace("Okt", "10.")
-                    //        .Replace("Nov", "11.")
-                    //        .Replace("Dez", "12.") +
-                    //        ", " +
-                    //        dateNode3.InnerText.Trim().Replace("&nbsp;","");
-
-                    //    Console.ForegroundColor = ConsoleColor.Yellow;
-                    //    Console.WriteLine(date);
-                    //}
-                    //else
-                    //{
-                    //    Console.ForegroundColor = ConsoleColor.Red;
-                    //    Console.WriteLine(">>> ERROR <<<: attribute value seems to be empty, exact date could not be extracted");
-                    //}
-                    //DateTime dateTimeObject;
-                    ////Extract the day and month components from the date string, accounting for variability that day and month can be either one or two digits:
-                    //string dateSubstring = Regex.Match(date, @"\d+\.\d+\.").Value + DateTime.Now.Year.ToString();
-                    //string[] dateParts = Regex.Match(date, @"\d+\.\d+\.").Value.Split('.');
-                    //int dayLength = dateParts[0].Length;
-                    //int monthLength = dateParts[1].Length;
-                    ////Construct a custom format string based on the lengths of the day and month components:
-                    //string customFormat = $"{new string('d', dayLength)}.{new string('M', monthLength)}.yyyy";
-                    //if (DateTime.TryParseExact(dateSubstring, customFormat, null, System.Globalization.DateTimeStyles.None, out dateTimeObject))
-                    //{
-                    //    Console.WriteLine("Parsing date string to DateTime object succeeded");
-                    //}
-                    //else
-                    //{
-                    //    Console.ForegroundColor = ConsoleColor.Red;
-                    //    Console.WriteLine(">>> ERROR <<<: Failed to parse date");
-                    //    Console.ResetColor();
-                    //}
+                    string[] dateParts = Regex.Match(dateSubstring, @"\d+\-\d+\-").Value.Split('-');
+                    int dayLength = dateParts[0].Length;
+                    int monthLength = dateParts[1].Length;
+                    //Construct a custom format string based on the lengths of the day and month components:
+                    string customFormat = $"{new string('d', dayLength)}-{new string('M', monthLength)}-yyyy";
+                    if (DateTime.TryParseExact(dateSubstring, customFormat, null, System.Globalization.DateTimeStyles.None, out dateTimeObject))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Parsing date string to DateTime object succeeded");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(">>> ERROR <<<: Failed to parse date");
+                        Console.ResetColor();
+                    }
 
                     string location = "Djurgårdsgatan 13";
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine(location);
+                    Console.ResetColor();
 
                     string title = "";
                     var titleNode = node.SelectSingleNode(".//h2");
@@ -813,7 +793,7 @@ namespace _FILEMNGMNT_EventsWebScraper
 
                     eventsList.Add(new EventData
                     {
-                        //DateTimeObject = dateTimeObject,
+                        DateTimeObject = dateTimeObject,
                         Date = date,
                         Location = location,
                         Title = title,
